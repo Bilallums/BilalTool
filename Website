@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BS </title>
+  <!-- Open Graph Meta -->
+  <meta property="og:title" content="BS SCANNER" />
+  <meta property="og:description" content="BS SCANNER – A Scanner Provider That Offers High Quality Scanner Tools." />
+  <meta property="og:image" content="https://media.discordapp.net/attachments/1335674550247100689/1337164518970626170/1d1dfc3bf2748568e0c22a62f807b702.png?ex=67af04c0&is=67adb340&hm=ef11ad826f61d2ebfc531c152f6bf694e4f100c7b7477f86c7a463be6035a7ce&=&format=webp&quality=lossless&width=192&height=192" />
+  <!-- Favicon (bitte Pfad anpassen) -->
+  <link rel="icon" type="image/png" href="" />
+  <!-- Externe Bibliotheken -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" />
+  <!-- Inline CSS -->
+  <style>
+    /* Basis-Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; color: #fff; background: url('assets/images/rename.png') no-repeat center center; background-size: cover; overflow-x: hidden; }
+    /* Header & Navigation */
+    header { width: 100%; position: fixed; top: 0; z-index: 100; background: rgba(0,0,0,0.7); padding: 20px 0; transition: background 0.3s ease; }
+    header.scrolled { background: rgba(0,0,0,0.9); }
+    .header { width: 90%; max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
+    .brand h1 { font-size: 1.8rem; }
+    nav { display: flex; gap: 25px; }
+    nav a { color: #fff; text-decoration: none; font-size: 1rem; transition: color 0.3s; }
+    nav a:hover { color: #f39c12; }
+    /* Landing/Hero Section */
+    #landing { padding-top: 100px; min-height: 100vh; display: flex; align-items: center; }
+    .container { width: 90%; max-width: 1200px; margin: auto; }
+    .row { display: flex; flex-wrap: wrap; align-items: center; }
+    .col-md-6 { flex: 0 0 50%; padding: 15px; }
+    .left { color: #fff; }
+    .box-welcome span { font-size: 1.2rem; font-weight: bold; }
+    .left h1 { font-size: 2.8rem; margin: 20px 0; }
+    .paragraph p { font-size: 1rem; margin-bottom: 15px; }
+    /* Button & Checkbox */
+    .checkbox-container { display: flex; align-items: center; margin-top: 20px; }
+    .button { padding: 12px 24px; background-color: #000000; color: #fff; border: none; border-radius: 30px; text-decoration: none; font-size: 16px; transition: background-color 0.3s ease; cursor: pointer; }
+    .button:disabled { background-color: grey; cursor: not-allowed; }
+    .button:hover { background-color: #0e0e0e; }
+    .checkbox-label { display: flex; align-items: center; margin-left: 10px; font-size: 16px; cursor: pointer; }
+    .checkbox-label input { display: none; }
+    .checkmark { width: 20px; height: 20px; border: 2px solid #fff; border-radius: 5px; margin-right: 10px; position: relative; transition: all 0.3s ease; }
+    .checkbox-label input:checked + .checkmark { background-color: #000000; border-color: #070707; }
+    .checkmark:before { content: ''; position: absolute; top: 3px; left: 3px; width: 10px; height: 10px; background-color: white; border-radius: 2px; transform: scale(0); transition: transform 0.2s ease; }
+    .checkbox-label input:checked + .checkmark:before { transform: scale(1); }
+    /* Bild auf der rechten Seite */
+    .right { text-align: center; }
+    .right img { max-width: 100%; border-radius: 50px; box-shadow: 0px 0px 50px #000000; position: relative; top: 30px; }
+    /* FAQ & weitere Sections */
+    section { padding: 60px 0; }
+    h2 { text-align: center; font-size: 2.5rem; margin-bottom: 20px; position: relative; display: inline-block; }
+    h2::after { content: ''; display: block; width: 50%; height: 3px; background: #000000; margin: 10px auto 0; }
+    .content { max-width: 800px; margin: 20px auto; font-size: 1rem; line-height: 1.6; text-align: center; }
+    /* FAQ-Styles */
+    .faq-item { margin: 40px 0; padding-left: 15px; border-left: 2px solid #000000; cursor: pointer; transition: color 0.3s; }
+    .faq-item h3 { font-size: 1.2rem; color: #fff; }
+    .faq-item:hover h3 { color: #000000; }
+    .faq-body { display: none; padding-left: 15px; margin-top: 20px; font-size: 0.95rem; text-align: left; }
+    hr { border: none; height: 1px; background: #000000; margin: 20px 0; }
+    /* Services Section */
+    .services-item1 { background: rgba(0,0,0,0.7); padding: 20px; border-radius: 10px; margin: 15px; text-align: center; }
+    .services-item1 h4 { margin-bottom: 10px; }
+    /* Footer */
+    footer { background: #111; padding: 40px 0; text-align: center; font-size: 0.9rem; color: #777; }
+  </style>
+  <!-- Schutz vor Tastaturkürzeln -->
+  <script>
+    var isNS = (navigator.appName === "Netscape") ? 1 : 0;
+    if(navigator.appName === "Netscape") document.captureEvents(Event.MOUSEDOWN || Event.MOUSEUP);
+    function mischandler() { return false; }
+    document.onkeydown = function(e) {
+      if (event.keyCode === 123) return false;
+      if (e.ctrlKey && e.shiftKey && (e.keyCode === 'I'.charCodeAt(0) || e.keyCode === 'i'.charCodeAt(0))) return false;
+      if (e.ctrlKey && e.shiftKey && (e.keyCode === 'C'.charCodeAt(0) || e.keyCode === 'c'.charCodeAt(0))) return false;
+      if (e.ctrlKey && e.shiftKey && (e.keyCode === 'J'.charCodeAt(0) || e.keyCode === 'j'.charCodeAt(0))) return false;
+      if (e.ctrlKey && (e.keyCode === 'U'.charCodeAt(0) || e.keyCode === 'u'.charCodeAt(0))) return false;
+      if (e.ctrlKey && (e.keyCode === 'S'.charCodeAt(0) || e.keyCode === 's'.charCodeAt(0))) return false;
+    }
+  </script>
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header id="navbar">
+    <div class="header">
+      <div class="brand"><h1>BS SCANNER&trade;</h1></div>
+      <nav class="nav">
+        <a href="#landing">Home</a>
+        <a href="ToS.html" target="_blank">ToS</a>
+        <a href="https://discord.gg/894xQpr47U" target="_blank" rel="noopener noreferrer">Discord</a>
+      </nav>
+    </div>
+  </header>
+  <!-- Landing / Hero Section -->
+  <section id="landing">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6" data-aos="fade-right" data-aos-duration="2200">
+          <div class="left">
+            <div class="box-welcome"><span>BS SCANNER</span></div>
+            <div class="content">
+              <h1 class="mb-3">Project BS SCANNER<span class="red">!</span></h1>
+              <div class="paragraph"><p class="mb-5">- ANTI Cheaters.</p></div>
+              <!-- Checkbox und Button in einer Zeile -->
+              <div class="checkbox-container">
+                <a id="download-btn" class="button" href="#" onclick="return false" disabled>Download</a>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="tos-checkbox">
+                  <span class="checkmark"></span>
+                  I agree to the ToS
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end right" data-aos="fade-left" data-aos-duration="2200">
+          <img class="tilted" src="assets/images/ezgif-4c4d72ac63fb6d.gif" alt="Scanner Image">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Product Info / Weitere Inhalte -->
+  <section id="product-info">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <p class="content">Weitere Informationen zu unserem Scanner kommen hier.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- FAQ Section -->
+  <!-- Services Section -->
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 BS SCANNER. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+  <!-- JS: Interaktionen, AOS Init, FAQ-Toggle -->
+  <script>
+    AOS.init({ disable: 'mobile', once: true });
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('navbar');
+      window.scrollY > 50 ? header.classList.add('scrolled') : header.classList.remove('scrolled');
+    });
+    const tosCheckbox = document.getElementById('tos-checkbox');
+    const downloadButton = document.getElementById('download-btn');
+    function toggleDownloadButton() {
+      if (tosCheckbox.checked) {
+        downloadButton.disabled = false;
+        downloadButton.href = 'assets/executeable/BS_SCANNER.exe';
+        downloadButton.removeAttribute('onclick');
+      } else {
+        downloadButton.disabled = true;
+        downloadButton.href = '#';
+        downloadButton.setAttribute('onclick', 'return false');
+      }
+    }
+    tosCheckbox.addEventListener('change', toggleDownloadButton);
+    toggleDownloadButton();
+    $(".faq-item").on('click', function() { $(this).find('.faq-body').slideToggle(); });
+  </script>
+</body>
+</html>
